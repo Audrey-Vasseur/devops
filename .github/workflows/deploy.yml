@@ -1,0 +1,31 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ] # Déclenche la pipeline dès qu'on pousse sur 'main'
+
+jobs:
+  deploy-infrastructure:
+    runs-on: self-hosted # On appelle ton runner Vagrant (Étape 1 validée !)
+    
+    steps:
+      - name: 📥 Récupération du code
+        uses: actions/checkout@v4
+        # Le runner télécharge les fichiers et fait le 'cd' tout seul ici.
+
+      - name: 📦 Builder l'image Docker
+        run: |
+          # On build la nouvelle version de l'image
+          sudo docker build -t hamustra/api-lacets:latest .
+          
+          # Optionnel mais recommandé si K3s ne trouve pas l'image locale :
+          # On l'injecte directement dans le cerveau de K3s
+          sudo docker save hamustra/api-lacets:latest | sudo k3s ctr images import -
+
+      - name: 🚀 Déployer sur l'infrastructure Kubernetes
+        run: |
+          # On applique les configurations (celles qu'on a réparées dans la Partie 3)
+          sudo k3s kubectl apply -f api-config.yaml
+          
+          # On force le pod à redémarrer pour qu'il utilise la nouvelle image fraîchement buildée
+          sudo k3s kubectl rollout restart deployment/api-server
