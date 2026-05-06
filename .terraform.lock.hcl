@@ -6,7 +6,6 @@ provider "registry.terraform.io/terra-farm/virtualbox" {
   constraints = "0.2.2-alpha.1"
   hashes = [
     "h1:A/LKHAU9g7E1T22xFHMmf0eWOdTm0pOgcTqZcEXA1V0=",
-    "h1:v7TbaC4KgI/Y/29FqYHeb1pt8yX5KOBvs4+ohW/U6tk=",
     "zh:0a584e8c4f74f09af41cbd37ac3634582ad45de68b9801f5585ec53af2efdc74",
     "zh:1d7fff5298e7d2066a9f2f5bbe5307332a819b851bec886604d65a247060a2f1",
     "zh:2771401dc0c7cb5cdc4896b772c8779663667316cd8d5b7ede9709022878982d",

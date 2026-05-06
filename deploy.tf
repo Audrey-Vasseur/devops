@@ -10,7 +10,7 @@ terraform {
 variable "network_host_if" {
   description = "Nom de la carte reseau hote pour le bridge"
   type        = string
-  default     = "MediaTek Wi-Fi 6E MT7922 (RZ616) 160MHz PCIe Adapter"
+  default     = "Intel(R) Wi-Fi 6E AX211 160MHz"
 }
 
 resource "virtualbox_vm" "debian_node" {
@@ -22,7 +22,7 @@ resource "virtualbox_vm" "debian_node" {
 
   network_adapter {
     type           = "bridged"
-    host_interface = "Realtek Gaming 2.5GbE Family Controller"
+    host_interface = "Intel(R) Wi-Fi 6E AX211 160MHz"
   }
 }
 
